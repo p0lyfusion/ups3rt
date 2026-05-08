@@ -1,0 +1,26 @@
+# Git
+.git/
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Secrets and data
+secrets/
+*.key
+*.pem
+data/
+
+# Docs and config not needed at runtime
+README.md
+docker-compose.yml
+.gitlab-ci.yml
+
+# IDE
+.idea/
+.vscode/
+*.swp

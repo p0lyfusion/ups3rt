@@ -1,0 +1,36 @@
+services:
+  cert-manager:
+    build: .
+    restart: always
+
+    environment:
+      UPS3RT_DOMAINS: "adhil.uk"
+      UPS3RT_ACME_EMAIL: "dops24361@gmail.com"
+      UPS3RT_S3_BUCKET: "ups3rt"
+      # Optional tuning — uncomment to override defaults:
+      # UPS3RT_RENEWAL_INTERVAL: "43200"
+      UPS3RT_RENEW_BEFORE_DAYS: "30"
+      UPS3RT_CF_PROPAGATION: "30"
+      # UPS3RT_METRICS_PORT: "9402"
+
+    secrets:
+      - CF_Token
+      - S3_ACCESS_KEY
+      - S3_SECRET_KEY
+
+    volumes:
+      - cert-data:/data
+
+    ports:
+      - "9402:9402"   # Prometheus metrics
+
+volumes:
+  cert-data:
+
+secrets:
+  CF_Token:
+    file: ./secrets/CF_Token
+  S3_ACCESS_KEY:
+    file: ./secrets/S3_ACCESS_KEY
+  S3_SECRET_KEY:
+    file: ./secrets/S3_SECRET_KEY
